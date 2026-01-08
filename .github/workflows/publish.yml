@@ -1,44 +1,69 @@
-name: Update FDroid Repo
+name: Update F-Droid Repo
 
 on:
+  # Run automatically when you push an APK to the repo folder
+  push:
+    paths:
+      - "fdroid/repo/*.apk"
+      - "fdroid/metadata/**"
+      - "fdroid/config.yml"
+  # Also allow manual button click
   workflow_dispatch:
-    inputs:
-      app:
-        description: 'App folder in metadata (e.g., com.devcat.quickinsure)'
-        required: true
-      version:
-        description: 'New version (e.g., 2.0.2)'
-        required: true
-      apk:
-        description: 'APK filename in repo folder'
-        required: true
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 
 jobs:
-  fdroid-update:
+  update-repo:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
+      # Install F-Droid Server
       - name: Install fdroidserver
         run: |
-          pip install fdroidserver
+          sudo apt-get update
+          sudo apt-get install -y fdroidserver
 
-      - name: Update FDroid metadata
+      # Point F-Droid to the GitHub Runner's built-in Android SDK
+      - name: Configure Android SDK
+        run: |
+          echo "ANDROID_HOME=$ANDROID_SDK_ROOT" >> $GITHUB_ENV
+
+      # The Magic Step: Update the Repo
+      - name: Run fdroid update
         run: |
           cd fdroid
-          fdroid update
+          fdroid update --create-metadata --pretty
 
-      - name: Commit and push changes
+      # CRITICAL: Commit the generated index and keystore back to the repo
+      - name: Commit Index and Keystore
         run: |
           git config user.name "fdroid-bot"
-          git config user.email "fdroid@github.com"
-          git add .
-          git commit -m "Update ${{ github.event.inputs.app }} APK and metadata to ${{ github.event.inputs.version }}"
+          git config user.email "bot@github.com"
+
+          git add fdroid/repo/index.xml fdroid/repo/index-v1.jar fdroid/repo/icons fdroid/keystore.p12
+
+          git commit -m "Auto-update F-Droid Repo [skip ci]" || echo "No changes to commit"
           git push
+
+      # Deploy to GitHub Pages
+      - name: Upload artifact for Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: fdroid/repo
+
+  deploy-pages:
+    needs: update-repo
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

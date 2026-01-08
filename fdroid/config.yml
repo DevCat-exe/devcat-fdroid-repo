@@ -1,10 +1,12 @@
-Repository:
-  Name: DevCat FDroid Repo
-  BaseURL: https://DevCat-exe.github.io/devcat-fdroid-repo/
-  Description: Official FDroid repository for DevCat apps
-  Contact: mahir.daiyan9011@gmail.com
-  Categories:
-    - Tools
-    - Internet
-RepoIcon: fdroid/icons/icon.png
-Prebuilt: true
+repo_name: "DevCat FDroid Repo"
+repo_url: "https://DevCat-exe.github.io/devcat-fdroid-repo/repo"
+repo_description: "Official FDroid repository for DevCat apps"
+repo_icon: "icon.png"
+email: "mahir.daiyan9011@gmail.com"
+
+categories:
+  - Tools
+  - Internet
+
+accepted_formats: ["json", "txt", "yml"]
+make_current_version_link: false
