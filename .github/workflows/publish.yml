@@ -3,9 +3,10 @@ name: Update F-Droid Repo
 on:
   push:
     paths:
+      # Run when APKs, Metadata, or the Website change
       - "fdroid/repo/*.apk"
       - "fdroid/metadata/**"
-      - "fdroid/config.yml"
+      - "fdroid/repo/index.html"
   workflow_dispatch:
 
 permissions:
@@ -27,32 +28,50 @@ jobs:
           python-version: "3.11"
 
       - name: Install fdroidserver
-        run: |
-          pip install fdroidserver
+        run: pip install fdroidserver
 
+      # Use the Runner's built-in SDK
       - name: Configure Android SDK
-        run: |
-          echo "ANDROID_HOME=$ANDROID_SDK_ROOT" >> $GITHUB_ENV
+        run: echo "ANDROID_HOME=$ANDROID_SDK_ROOT" >> $GITHUB_ENV
 
-      # UPDATED STEP: Added --create-key
+      # STEP 1: Restore the Keystore from Secret
+      - name: Restore Keystore
+        run: |
+          cd fdroid
+          echo "${{ secrets.KEYSTORE_FILE }}" | base64 -d > keystore.p12
+
+      # STEP 2: Inject Passwords into config.yml temporarily
+      - name: Inject Secrets into Config
+        run: |
+          cd fdroid
+          echo "" >> config.yml
+          echo "repo_keyalias: ${{ secrets.KEY_ALIAS }}" >> config.yml
+          echo "keystore: keystore.p12" >> config.yml
+          echo "keystorepass: ${{ secrets.KEYSTORE_PASS }}" >> config.yml
+          echo "keypass: ${{ secrets.KEY_PASS }}" >> config.yml
+
+      # STEP 3: Run Update
       - name: Run fdroid update
         run: |
           cd fdroid
-          # --create-key: Generates a keystore if one doesn't exist
-          # --create-metadata: Generates metadata for new APKs
-          fdroid update --create-metadata --pretty --create-key
+          fdroid update --create-metadata --pretty
 
-      # UPDATED STEP: Commit config.yml too!
-      # fdroid writes the new keystore password into config.yml, so we must save it.
-      - name: Commit Index, Keystore, and Config
+      # STEP 4: Cleanup (CRITICAL: Remove secrets before committing)
+      - name: Clean Config & Keystore
+        run: |
+          cd fdroid
+          git checkout config.yml
+          rm keystore.p12
+
+      # STEP 5: Commit Public Files Only
+      - name: Commit Index & Website
         run: |
           git config user.name "fdroid-bot"
           git config user.email "bot@github.com"
 
-          # Add the keystore, the generated index, AND the updated config.yml
-          git add fdroid/repo/index.xml fdroid/repo/index-v1.jar fdroid/repo/icons fdroid/keystore.p12 fdroid/config.yml
+          git add fdroid/repo/index.xml fdroid/repo/index-v1.jar fdroid/repo/icons
 
-          git commit -m "Initialize/Update F-Droid Repo [skip ci]" || echo "No changes to commit"
+          git commit -m "Update Repo Index [skip ci]" || echo "No changes to commit"
           git push
 
       - name: Upload artifact for Pages
