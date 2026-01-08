@@ -26,38 +26,35 @@ jobs:
         with:
           python-version: "3.11"
 
-      # FIX: Use pip instead of apt-get to get the newest F-Droid Server
-      # The apt version (2.2.1) crashes on modern APKs
       - name: Install fdroidserver
         run: |
           pip install fdroidserver
 
-      # Set up Android SDK environment for the runner
       - name: Configure Android SDK
         run: |
           echo "ANDROID_HOME=$ANDROID_SDK_ROOT" >> $GITHUB_ENV
 
-      # Update the repo
+      # UPDATED STEP: Added --create-key
       - name: Run fdroid update
         run: |
           cd fdroid
-          # --create-metadata generates missing info automatically
-          fdroid update --create-metadata --pretty
+          # --create-key: Generates a keystore if one doesn't exist
+          # --create-metadata: Generates metadata for new APKs
+          fdroid update --create-metadata --pretty --create-key
 
-      # Commit the changes (Index & Keystore) so your repo stays valid
-      - name: Commit Index and Keystore
+      # UPDATED STEP: Commit config.yml too!
+      # fdroid writes the new keystore password into config.yml, so we must save it.
+      - name: Commit Index, Keystore, and Config
         run: |
           git config user.name "fdroid-bot"
           git config user.email "bot@github.com"
 
-          # Force add the important files
-          git add fdroid/repo/index.xml fdroid/repo/index-v1.jar fdroid/repo/icons fdroid/keystore.p12
+          # Add the keystore, the generated index, AND the updated config.yml
+          git add fdroid/repo/index.xml fdroid/repo/index-v1.jar fdroid/repo/icons fdroid/keystore.p12 fdroid/config.yml
 
-          # Only commit if something actually changed
-          git commit -m "Auto-update F-Droid Repo [skip ci]" || echo "No changes to commit"
+          git commit -m "Initialize/Update F-Droid Repo [skip ci]" || echo "No changes to commit"
           git push
 
-      # Publish to GitHub Pages
       - name: Upload artifact for Pages
         uses: actions/upload-pages-artifact@v3
         with:
