@@ -10,7 +10,3 @@ categories:
 
 accepted_formats: ["json", "txt", "yml"]
 make_current_version_link: false
-repo_keyalias: runnervmi13qx.xgfgn4kle41ubogplxz1ypeioe.cx.internal.cloudapp.net
-keydname: CN=runnervmi13qx.xgfgn4kle41ubogplxz1ypeioe.cx.internal.cloudapp.net, OU=F-Droid
-keystorepass: eZDqa/JiqDvkQvN3Lsf1i30d7qkUWrZdFVvc7J8DgJI=
-keypass: eZDqa/JiqDvkQvN3Lsf1i30d7qkUWrZdFVvc7J8DgJI=
