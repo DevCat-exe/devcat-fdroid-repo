@@ -17,7 +17,7 @@ permissions:
 jobs:
   update-repo:
     runs-on: ubuntu-latest
-
+    
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -25,22 +25,21 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
       - name: Install fdroidserver
         run: pip install fdroidserver
 
-      # Use the Runner's built-in SDK
       - name: Configure Android SDK
         run: echo "ANDROID_HOME=$ANDROID_SDK_ROOT" >> $GITHUB_ENV
 
-      # STEP 1: Restore the Keystore from Secret
+      # Restore Keystore
       - name: Restore Keystore
         run: |
           cd fdroid
           echo "${{ secrets.KEYSTORE_FILE }}" | base64 -d > keystore.p12
 
-      # STEP 2: Inject Passwords into config.yml temporarily
+      # Inject Secrets
       - name: Inject Secrets into Config
         run: |
           cd fdroid
@@ -50,34 +49,37 @@ jobs:
           echo "keystorepass: ${{ secrets.KEYSTORE_PASS }}" >> config.yml
           echo "keypass: ${{ secrets.KEY_PASS }}" >> config.yml
 
-      # STEP 3: Run Update
+      # Run Update
       - name: Run fdroid update
         run: |
           cd fdroid
           fdroid update --create-metadata --pretty
 
-      # STEP 4: Cleanup (CRITICAL: Remove secrets before committing)
+      # Cleanup Secrets
       - name: Clean Config & Keystore
         run: |
           cd fdroid
           git checkout config.yml
           rm keystore.p12
 
-      # STEP 5: Commit Public Files Only
-      - name: Commit Index & Website
+      # Commit changes to Git
+      - name: Commit Index
         run: |
           git config user.name "fdroid-bot"
           git config user.email "bot@github.com"
-
           git add fdroid/repo/index.xml fdroid/repo/index-v1.jar fdroid/repo/icons
-
           git commit -m "Update Repo Index [skip ci]" || echo "No changes to commit"
           git push
+
+      - name: Prepare Website Structure
+        run: |
+          mkdir -p public/repo
+          cp -r fdroid/repo/* public/repo/
 
       - name: Upload artifact for Pages
         uses: actions/upload-pages-artifact@v3
         with:
-          path: fdroid/repo
+          path: public
 
   deploy-pages:
     needs: update-repo
