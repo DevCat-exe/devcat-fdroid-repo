@@ -1,0 +1,38 @@
+name: Update FDroid Repo
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "App version being updated"
+        required: true
+
+jobs:
+  fdroid-update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install fdroidserver
+        run: |
+          pip install fdroidserver
+
+      - name: Update FDroid metadata
+        run: |
+          cd fdroid
+          fdroid update
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "fdroid-bot"
+          git config user.email "fdroid@github.com"
+          git add .
+          git commit -m "Update Quick Insure APK and metadata for version ${{ github.event.inputs.version }}"
+          git push

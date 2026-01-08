@@ -1,0 +1,9 @@
+Repository:
+  Name: DevCat FDroid Repo
+  BaseURL: https://DevCat-exe.github.io/devcat-fdroid-repo/
+  Description: Official FDroid repository for DevCat apps
+  Contact: mahir.daiyan9011@gmail.com
+  Categories:
+    - Tools
+    - Internet
+  DefaultIncludeSources: true
