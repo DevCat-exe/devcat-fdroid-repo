@@ -1,0 +1,4 @@
+Hotfix Update:
+- Fixed internal package structure (MainActivity)
+- Removed "example" package artifacts
+- General stability improvements
