@@ -1,15 +1,13 @@
-# Fdroid Release!! - Check out [devcat-fdroid-repo](https://github.com/DevCat-exe/devcat-fdroid-repo)
+Fdroid Release!! - Check out [devcat-fdroid-repo](https://github.com/DevCat-exe/devcat-fdroid-repo)
 
-### Fixed
-- Fixed Android release signing configuration
-- Fixed update issues that required uninstall/reinstall
-- Ensured proper versionCode increments for seamless updates
-- Proper applicationID configuration
+Fixed:
+- Android release signing configuration
+- Update issues that required uninstall/reinstall
+- Seamless updates via version code fix
+- ApplicationID configuration
 
-### Improved
-- Clarified update flow for external package managers (FDroid / Neo-Store)
+Improved:
+- Update flow for external package managers (FDroid / Neo-Store)
 
-### Permissions
-- Uses **INTERNET** permission only
-  - Required to check for updates and load external links
-  - No background network activity
+Permissions:
+- Added INTERNET permission (Required for updates and external links)
