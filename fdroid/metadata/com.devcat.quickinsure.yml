@@ -1,0 +1,13 @@
+# General Info (These populate the Links section)
+SourceCode: https://github.com/DevCat-exe/Quick-Insure
+IssueTracker: https://github.com/DevCat-exe/Quick-Insure/issues
+WebSite: https://www.devcat.zone.id/
+Changelog: https://github.com/DevCat-exe/quick-Insure/releases
+
+# License (Standard SPDX Identifier)
+License: GPL-3.0-only
+
+# Category
+Categories:
+  - Money
+  - Tools

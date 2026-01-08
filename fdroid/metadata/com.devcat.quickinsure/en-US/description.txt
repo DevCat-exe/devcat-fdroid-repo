@@ -1,4 +1,4 @@
-    # 🚗 Quick Insure
+# 🚗 Quick Insure
 
 **Quick Insure** is a modern, Android **Flutter insurance calculator app** designed to help users accurately calculate insurance premiums with a clean UI, smooth animations, and offline-first performance.
 
@@ -19,16 +19,6 @@ The app currently supports **Motor Insurance**
   Minimal design, smooth transitions, and intuitive navigation
 
 ---
-
-## 🛠️ Tech Stack
-
-| Category  | Technologies                               |
-| --------- | ------------------------------------------ |
-| Framework | Flutter                                    |
-| Language  | Dart                                       |
-| UI        | Material Design, Custom Animations         |
-| State     | Local state management                     |
-| Platform  | Android (APK), extensible to iOS & Desktop |
 
 ## 🚧 Planned Features
 
