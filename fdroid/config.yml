@@ -6,4 +6,5 @@ Repository:
   Categories:
     - Tools
     - Internet
-  DefaultIncludeSources: true
+RepoIcon: fdroid/icons/icon.png
+Prebuilt: true
