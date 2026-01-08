@@ -3,8 +3,14 @@ name: Update FDroid Repo
 on:
   workflow_dispatch:
     inputs:
+      app:
+        description: 'App folder in metadata (e.g., com.devcat.quickinsure)'
+        required: true
       version:
-        description: "App version being updated"
+        description: 'New version (e.g., 2.0.2)'
+        required: true
+      apk:
+        description: 'APK filename in repo folder'
         required: true
 
 jobs:
@@ -18,7 +24,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
       - name: Install fdroidserver
         run: |
@@ -34,5 +40,5 @@ jobs:
           git config user.name "fdroid-bot"
           git config user.email "fdroid@github.com"
           git add .
-          git commit -m "Update Quick Insure APK and metadata for version ${{ github.event.inputs.version }}"
+          git commit -m "Update ${{ github.event.inputs.app }} APK and metadata to ${{ github.event.inputs.version }}"
           git push
