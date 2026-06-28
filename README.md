@@ -1,69 +1,68 @@
+<div align="center">
+
 # DevCat F-Droid Repository
 
-Official F-Droid repository for apps published by **DevCat**.
+<img src="https://img.shields.io/badge/Maintained-Yes-success?style=flat-square" alt="Maintained">
+<img src="https://img.shields.io/badge/F--Droid-Compatible-3498DB?style=flat-square&logo=f-droid&logoColor=white" alt="F-Droid Compatible">
 
-This repository is compatible with **F-Droid**, **Neo Store**, and **Droid-ify**.
+**Official software repository for apps built by DevCat.**<br>
+Compatible with **Droid-ify**, **Neo Store**, and official F-Droid clients.
 
 ---
 
-## 🚀 One-Click Install (Recommended)
+## 🚀 One-Click Install
 
-If you already have an F-Droid client installed, use the button below or scan the QR code.
+Scan the QR code or click the button to add this repo instantly.
 
-<a href="fdroidrepos://DevCat-exe.github.io/devcat-fdroid-repo/repo?fingerprint=2DF393D82A16ACDA06DDECAE7870001786EF1077921151F291C7D0A326AF127E">
-  <img src="https://img.shields.io/badge/Add%20to%20F--Droid-3498DB?style=for-the-badge&logo=f-droid&logoColor=white" height="42">
+<a href="fdroidrepos://devcat-exe.github.io/devcat-fdroid-repo/repo?fingerprint=2DF393D82A16ACDA06DDECAE7870001786EF1077921151F291C7D0A326AF127E">
+  <img src="https://img.shields.io/badge/Add_to_F--Droid-3498DB?style=for-the-badge&logo=f-droid&logoColor=white" height="50">
 </a>
 
 <br><br>
 
-<img
-  src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=fdroidrepos%3A%2F%2FDevCat-exe.github.io%2Fdevcat-fdroid-repo%2Frepo%3Ffingerprint%3D2DF393D82A16ACDA06DDECAE7870001786EF1077921151F291C7D0A326AF127E"
-  width="180"
-  alt="DevCat F-Droid Repo QR Code"
-/>
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=fdroidrepos%3A%2F%2Fdevcat-exe.github.io%2Fdevcat-fdroid-repo%2Frepo%3Ffingerprint%3D2DF393D82A16ACDA06DDECAE7870001786EF1077921151F291C7D0A326AF127E" width="160" alt="QR Code">
+
+</div>
 
 ---
 
 ## ⚙️ Manual Setup
 
-If one-click setup doesn’t work, add the repository manually:
+If the one-click setup doesn't trigger your app, you can add the repository manually:
 
-**Repository URL**
+**1. Repository Address**
+```text
+https://devcat-exe.github.io/devcat-fdroid-repo/repo
 ```
 
-https://DevCat-exe.github.io/devcat-fdroid-repo/repo
-
-```
-
-**Fingerprint (SHA-256)**
-```
-
-2D F3 93 D8 2A 16 AC DA 06 DD EC AE 78 70 00 17
-86 EF 10 77 92 11 51 F2 91 C7 D0 A3 26 AF 12 7E
-
+**2. Fingerprint (SHA-256)**
+```text
+2DF393D82A16ACDA06DDECAE7870001786EF1077921151F291C7D0A326AF127E
 ```
 
 ---
 
 ## 📱 Available Apps
 
-### Quick Insure
-A simple, offline-first insurance calculator built with Flutter.
+### 🚗 [Quick Insure](https://github.com/DevCat-exe/quick-Insure)
+**A modern, offline-first insurance calculator built with Flutter.**
 
-- Clean UI
-- No ads
-- No tracking
-- Minimal permissions
+| Feature | Description |
+| :--- | :--- |
+| 🛡️ **Privacy** | Zero ads, zero tracking, offline-first. |
+| 🎨 **UI/UX** | Clean Material design with Dark Mode support. |
+| ⚡ **Performance** | Lightweight and instant calculations. |
 
 ---
 
 ## 🔐 Security & Trust
 
-- APKs are signed with a **stable release key**
-- Repository fingerprint is publicly verifiable
-- Apps are built from **open-source code**
-- Updates are generated using **F-Droid compatible tooling**
+*   **Verifiable:** All APKs are signed with a consistent release key.
+*   **Open Source:** Apps are built directly from public source code.
+*   **Automation:** This repository is updated automatically via GitHub Actions.
 
 ---
 
-Maintained by **[DevCat.exe](https://github.com/DevCat-exe)**
+<div align="center">
+  Maintained by <b><a href="https://github.com/DevCat-exe">DevCat.exe</a></b>
+</div>
