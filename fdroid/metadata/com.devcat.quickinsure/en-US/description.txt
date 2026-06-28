@@ -1,10 +1,11 @@
 <p><b>Quick Insure</b> is a modern, offline-first insurance calculator built with Flutter. It helps users accurately calculate premiums with a clean UI and smooth animations.</p>
 
-<p>The app currently supports <b>Motor Insurance</b>.</p>
+<p>The app currently supports <b>Motor Insurance</b> and <b>Fire Insurance</b>.</p>
 
 <p><b>✨ Features:</b></p>
 <ul>
     <li><b>Motor Insurance Calculator:</b> Calculate premiums with accurate breakdowns and instant results.</li>
+    <li><b>Fire Insurance Calculator:</b> Zone-based property insurance with multiple risk options (Fire, Earthquake, Cyclone, Flood) and individual premium breakdowns.</li>
     <li><b>Calculation History:</b> Automatically saves previous calculations for quick reference.</li>
     <li><b>Light & Dark Mode:</b> Seamless theme switching with a polished UI.</li>
     <li><b>Clean UX:</b> Minimal design, smooth transitions, and intuitive navigation.</li>

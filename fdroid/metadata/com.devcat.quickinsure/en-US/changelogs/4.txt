@@ -1,0 +1,5 @@
+New Feature Release:
+- 🔥 Fire Insurance Calculator - New calculator for property insurance with zone-based risk rates
+- Checkbox-based risk selection UI for Fire Insurance (Fire, Earthquake, Cyclone, Flood)
+- Individual risk premium breakdown in calculation results and PDF export
+- Improved result popup to display individual risk premiums per risk type

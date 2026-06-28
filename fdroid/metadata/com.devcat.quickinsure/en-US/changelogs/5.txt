@@ -1,0 +1,4 @@
+Hotfix Update:
+- Corrected Sylhet earthquake rate from 0.03% to 0.3%
+- Fixed About Dialog changelog display and responsive constraints
+- Fixed Update Checker changelog fetching from latest GitHub release
