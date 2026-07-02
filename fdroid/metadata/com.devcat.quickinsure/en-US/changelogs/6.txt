@@ -1,0 +1,5 @@
+Release 2.1.2:
+- Added: Configured production release signing keys and verified Google Play Store readiness
+- Changed: Updated copyright year in About dialog and drawer to 2026
+- Added: Added Overseas Mediclaim card (Coming Soon) to Home Screen
+- Fixed: Fixed bottom layout overflow on small screens in Update Checker by making the changelog view scrollable
