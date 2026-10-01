@@ -4,4 +4,4 @@ Release 2.2.0:
 - Added: Windows installer and in-app Windows updates
 - Improved: Searchable history with registration details shown separately
 - Improved: Navigation, phone layout and readable desktop notices
-- Fixed: History list index after the search/filter row
+- Fixed: History list crash from out-of-range index after the search/filter row

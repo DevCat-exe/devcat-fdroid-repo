@@ -69,7 +69,16 @@ jobs:
           git config user.email "bot@github.com"
           git add fdroid/repo/index.xml fdroid/repo/index-v1.jar fdroid/repo/icons
           git commit -m "Update Repo Index [skip ci]" || echo "No changes to commit"
-          git push
+          # GitHub occasionally answers with a transient 500; retry before failing.
+          for attempt in 1 2 3; do
+            if git push; then
+              exit 0
+            fi
+            echo "git push failed (attempt $attempt/3), retrying in 15s..."
+            sleep 15
+          done
+          echo "git push failed after 3 attempts."
+          exit 1
 
       - name: Prepare Website Structure
         run: |
