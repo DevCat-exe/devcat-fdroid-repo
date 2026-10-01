@@ -1,0 +1,7 @@
+Release 2.2.0:
+- Added: Motor registration for DHAKA-METRO or CHATTA-METRO with formatted class, series and vehicle numbers
+- Added: In-app Android updates with download progress and install approval
+- Added: Windows installer and in-app Windows updates
+- Improved: Searchable history with registration details shown separately
+- Improved: Navigation, phone layout and readable desktop notices
+- Fixed: History list index after the search/filter row
